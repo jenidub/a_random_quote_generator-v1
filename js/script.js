@@ -74,6 +74,7 @@ function createRGB() {
  * `getRandomQuote` function
  * Capture a random selection from the quotes array of objects for display
 ***/
+
 function getRandomQuote() {
   let randomIndex = Infinity
 
@@ -86,6 +87,8 @@ function getRandomQuote() {
   
   // Update the lastIndex for the next iteration
   lastIndex = randomIndex
+
+  //Return the quote object associated with the randomIndex
   return quotes[randomIndex]
 }
 
@@ -96,6 +99,7 @@ function getRandomQuote() {
  * After the HTML has been generated, add the markup to ID #quote-box 
  * and update the page background color
 ***/
+
 function printQuote() {
   setInterval(() => {
     let displayQuote = getRandomQuote()
@@ -106,7 +110,7 @@ function printQuote() {
     `
   
     if (displayQuote.citation) {
-      html += `<span class="citation">${displayQuote.citation}</span>`
+      html += `<span class="citation"> ${displayQuote.citation}</span>`
     }
   
     if (displayQuote.year) {
