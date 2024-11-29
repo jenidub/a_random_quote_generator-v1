@@ -7,9 +7,21 @@ project 1 - A Random Quote Generator
   // Check the "Project Resources" section of the project instructions
   // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
 
+
+// #####################
+/***
+ * Hi My name is JeniDub and I am aiming for the Exceeds Expectations grade
+ */
+
 /*** 
  * `quotes` array 
+ * Create an array of objects where each object contains the quote text, author, and various properties
+ * Added the additional property-value pairs:
+ * - 'tags; for content area
+ * - 'year' for year of quote if known
+ * - 'citation' for source if known 
 ***/
+
 quotes = [
   {
     quote: "Give the world the best you have, and it may never be enough. Give the world the best you've got anyway.", 
@@ -44,28 +56,45 @@ quotes = [
 let lastIndex
 
 /*** 
- * Exceeds Activity: Generate Random RGB
+ * Function: Generate Random RGB
+ * This function generates a random RGB value for the background color of the newly generated quote
+ * Makes use of the Math.random and Math.floor methods * 255 (the maximum value of the R, G, and B values)
 */
 
 function createRGB() {
-  let randomRgb = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
+  let getRgbValue1 = Math.floor((Math.random() * 255) + 1)
+  let getRgbValue2 = Math.floor((Math.random() * 255) + 1)
+  let getRgbValue3 = Math.floor((Math.random() * 255) + 1)
+
+  let randomRgb = `rgb(${getRgbValue1}, ${getRgbValue2}, ${getRgbValue3})`
   return randomRgb
 }
 
 /***
  * `getRandomQuote` function
+ * Capture a random selection from the quotes array of objects for display
 ***/
 function getRandomQuote() {
   let randomIndex = Infinity
+
+  // Ensure that the same quote is not shown consecutively
+  // Conditional: check if the randomIndex has already been used
+  // or if randomValue is the initial value of Infinity
   while (randomIndex === lastIndex || randomIndex === Infinity) {
     randomIndex = Math.floor(Math.random() * quotes.length)
   }
+  
+  // Update the lastIndex for the next iteration
   lastIndex = randomIndex
   return quotes[randomIndex]
 }
 
 /***
  * `printQuote` function
+ * Using the randomly selected quote object from getRandomQuote(),
+ * create the HTML markup per the instructions list on Treehouse.
+ * After the HTML has been generated, add the markup to ID #quote-box 
+ * and update the page background color
 ***/
 function printQuote() {
   setInterval(() => {
@@ -77,7 +106,7 @@ function printQuote() {
     `
   
     if (displayQuote.citation) {
-      html += `<span class="citation"> ${displayQuote.citation}</span>`
+      html += `<span class="citation">${displayQuote.citation}</span>`
     }
   
     if (displayQuote.year) {
@@ -92,7 +121,7 @@ function printQuote() {
   
     document.getElementById('quote-box').innerHTML = html;
     document.querySelector("body").style.backgroundColor = createRGB()
-  }, 10000)
+  }, 1000)
 }
 
 /***
